@@ -1,5 +1,7 @@
 #! /bin/bash
 
+sudo cp ~/stepic_web/nginx.conf /etc/nginx/nginx.conf
+sudo /etc/init.d/nginx start
 mkdir -p web/public/img
 mkdir web/public/css
 mkdir web/public/js
