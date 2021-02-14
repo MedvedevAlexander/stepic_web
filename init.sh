@@ -8,3 +8,4 @@ mkdir ~/web/public/css
 mkdir ~/web/public/js
 mkdir ~/web/uploads
 mkdir ~/web/etc
+cp ~/stepic_web/hello.py ~/web/hello.py
