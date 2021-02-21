@@ -26,7 +26,7 @@ sudo mysql -u root -e 'create user "django"@"localhost" identified by "367UhzGhj
 sudo mysql -u root -e 'grant all privileges on ask.* to "django"@"localhost"'
 
 # Создание таблиц в Django
-cd ~web/ask
+cd ~/web/ask
 python3 manage.py makemigrations
 python3 manage.py migrate
 

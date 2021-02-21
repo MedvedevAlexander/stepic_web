@@ -1,9 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User as UserModel
-
-
-class User(UserModel):
-    pass
+from django.contrib.auth.models import User
 
 
 class Question(models.Model):
