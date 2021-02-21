@@ -3,15 +3,13 @@
 #обновляем только django хотя бы до версии 2.0, остальное не трогаем. Степ 2.1 таким образом был успешно сдан.
 #как же ужасен этот терминал
 
-'''
-Перед запуском на тестовом сервере необходимо:
-1. удалить из setting.py пару ключ - значение:
-  'DIRS': [os.path.join(BASE_DIR, 'templates')],
-Из-за старой версии Django на сервере возникает ошибка
-2. Закомментировать в web/ask/ask/__ini__.py следующие строки:
-  import pymysql
-  pymysql.install_as_MySQLdb()
-'''
+# Перед запуском на тестовом сервере необходимо:
+# 1. удалить из setting.py пару ключ - значение:
+#  'DIRS': [os.path.join(BASE_DIR, 'templates')],
+# Из-за старой версии Django на сервере возникает ошибка
+# 2. Закомментировать в web/ask/ask/__ini__.py следующие строки:
+#  import pymysql
+#  pymysql.install_as_MySQLdb()
 
 # Устанавливаем более свежую версию Django
 sudo pip3 install django==2.0
@@ -35,8 +33,8 @@ sudo nginx -s reload
 # создание БД в MySQL
 sudo /etc/init.d/mysql start
 sudo mysql -u root -e 'create database ask'
-sudo mysql -u root -e 'create user "box"@"localhost"'
-sudo mysql -u root -e 'grant all privileges on ask.* to "box"@"localhost"'
+sudo mysql -u root -e 'create user "django"@"localhost" identified by "367UhzGhjNhfLtd*"'
+sudo mysql -u root -e 'grant all privileges on ask.* to "django"@"localhost"'
 
 # Создание таблиц в Django
 cd ~/web/ask
