@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 class Question(models.Model):
     title = models.CharField(max_length=255)
     text = models.TextField()
-    added_at = models.DateTimeField(blank=True)
-    rating = models.IntegerField(blank=True)
+    added_at = models.DateField(blank=True)
+    rating = models.IntegerField(default=0)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     likes = models.ManyToManyField(User, related_name='likes_set')
 
@@ -21,7 +21,7 @@ class QuestionManager(models.Manager):
 
 class Answer(models.Model):
     text = models.TextField()
-    added_at = models.DateTimeField()
+    added_at = models.DateField(blank=True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 

@@ -3,8 +3,15 @@
 #обновляем только django хотя бы до версии 2.0, остальное не трогаем. Степ 2.1 таким образом был успешно сдан.
 #как же ужасен этот терминал
 
+# Перед запуском на тестовом сервере необходимо удалить из setting.py пару ключ - значение:
+# 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+# Из-за старой версии Django на сервере возникает ошибка
+
 # Устанавливаем более свежую версию Django
 sudo pip3 install django==2.0
+
+# Устанавливаем зависимости
+sudo pip install pathlib
 
 # Копируем конфигурацию nginx
 sudo cp ~/stepic_web/nginx.conf /etc/nginx/nginx.conf
@@ -27,9 +34,9 @@ sudo mysql -u root -e 'grant all privileges on ask.* to "django"@"localhost"'
 
 # Создание таблиц в Django
 cd ~/web/ask
-python3 manage.py makemigrations
-python3 manage.py migrate
+sudo python3 manage.py makemigrations
+sudo python3 manage.py migrate
 
 # Запуск backend сервера (для получения запросов по WSGI)
 cd ~/web/ask
-sudo gunicorn -b 0.0.0.0:8000 ask.wsgi:application
+sudo python3 gunicorn -b 0.0.0.0:8000 ask.wsgi:application
