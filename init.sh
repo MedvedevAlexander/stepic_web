@@ -37,9 +37,9 @@ sudo nginx -s reload
 #sudo mysql -u root -e 'grant all privileges on ask.* to "django"@"localhost"'
 
 # Создание таблиц в Django
-cd ~/web/ask
-sudo python3 manage.py makemigrations
-sudo python3 manage.py migrate
+#cd ~/web/ask
+#sudo python3 manage.py makemigrations
+#sudo python3 manage.py migrate
 
 # Запуск backend сервера (для получения запросов по WSGI)
 cd ~/web/ask
