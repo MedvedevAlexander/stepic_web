@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8" />
+  <title>Questions and Answers</title>
+ </head>
+ <body>
+  <p></p>
+ {% for question in paginator %}
+  <p> {{ question.title }} </p>
+ {% endfor %}
+
+ </body>
+</html>
