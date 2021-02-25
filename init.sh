@@ -43,4 +43,6 @@ sudo nginx -s reload
 
 # Запуск backend сервера (для получения запросов по WSGI)
 cd ~/web/ask
-sudo python3 gunicorn -b 0.0.0.0:8000 ask.wsgi:application
+#gunicorn -b 0.0.0.0:8000 ask.wsgi:application
+
+python3 manage.py runserver 127.0.0.1:8000

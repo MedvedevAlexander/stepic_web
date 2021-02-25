@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <meta charset="utf-8" />
-  <title>Questions and Answers</title>
- </head>
- <body>
-  <p></p>
- {% for question in paginator %}
-  <p> {{ question.title }} </p>
- {% endfor %}
+{% extends 'qa/base.html' %}
 
- </body>
-</html>
+  {% block question_block %}
+    {% for question in paginator %}
+    <p> <a href="{% url 'ask:question' question.id  %}"> {{ question.title }} </a></p>
+    {% endfor %}
+  {% endblock %}

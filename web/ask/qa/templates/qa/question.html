@@ -1,0 +1,17 @@
+{% extends 'qa/base.html' %}
+
+{% block question_block %}
+    <div>
+        {{ question.title }}
+    </div>
+    <div>
+       {{ question.text }}
+    </div>
+
+    {% for answer in question.answer_set.all %}
+        <div>
+            {{ answer.text}}
+        </div>
+    {% endfor %}
+
+{% endblock %}
