@@ -31,15 +31,15 @@ sudo nginx -s reload
 #cp ~/stepic_web/hello.py ~/web/hello.py
 
 # создание БД в MySQL
-#sudo /etc/init.d/mysql start
-#sudo mysql -u root -e 'create database ask'
-#sudo mysql -u root -e 'create user "django"@"localhost" identified by "367UhzGhjNhfLtd*"'
-#sudo mysql -u root -e 'grant all privileges on ask.* to "django"@"localhost"'
+sudo /etc/init.d/mysql start
+sudo mysql -u root -e 'create database ask'
+sudo mysql -u root -e 'create user "django"@"localhost" identified by "367UhzGhjNhfLtd*"'
+sudo mysql -u root -e 'grant all privileges on ask.* to "django"@"localhost"'
 
 # Создание таблиц в Django
-#cd ~/web/ask
-#sudo python3 manage.py makemigrations
-#sudo python3 manage.py migrate
+cd ~/web/ask
+sudo python3 manage.py makemigrations
+sudo python3 manage.py migrate
 
 # Запуск backend сервера (для получения запросов по WSGI)
 cd ~/web/ask
