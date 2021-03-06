@@ -1,17 +1,39 @@
 {% extends 'qa/base.html' %}
 
 {% block question_block %}
-    <div>
+    <div class="question_title">
         {{ question.title }}
     </div>
-    <div>
+    <div class="question_text">
        {{ question.text }}
     </div>
 
     {% for answer in question.answer_set.all %}
-        <div>
+        <div class="answer">
             {{ answer.text}}
         </div>
     {% endfor %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="non_field_errors">
+            {% for e in form.non_field_errors %}
+                <div class="non_field_error">
+                    {{ e }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="answer_form">
+            <div class="text_field_errors">
+                {{ form.text.errors }}
+            </div>
+            <div class="text_field">
+                {{form.label}}{{ form.text }}
+            </div>
+        </div>
+        <div class="button">
+            <button type="submit"> Отправить ответ </button>
+        </div>
+    </form>
 
 {% endblock %}

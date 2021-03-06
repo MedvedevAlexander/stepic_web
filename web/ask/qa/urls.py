@@ -7,9 +7,11 @@ urlpatterns = [
     path('login/', views.test, name='login'),
     path('signup/', views.test, name='signup'),
     path('question/<int:question_id>/', views.question, name='question'),
-    path('ask/', views.test, name='ask'),
+    path('ask/', views.ask, name='ask'),
     path('popular/', views.popular, name='popular'),
     path('new/', views.test, name='new'),
+    path('name/', views.get_name, name='name'),
+    path('thanks/', views.thanks, name='thanks')
 
 ]
 

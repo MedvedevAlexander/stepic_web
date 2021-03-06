@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask page</title>
+</head>
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="non_field_errors">
+            {% for e in form.non_field_errors %}
+                <div class="non_field_error">
+                    {{ e }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="form_fields">
+            <div class="form_field">
+                {% for field in form %}
+                    <div class='field_error'>
+                        {% if field.errors %}
+                            {{ field.errors }}
+                        {% endif %}
+                    </div>
+                    <div class="field">
+                        {{ field.label }} {{ field}}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit"> Задать вопрос</button>
+        </div>
+    </form>
+</body>
+</html>
