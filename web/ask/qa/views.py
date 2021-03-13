@@ -5,8 +5,11 @@ from django.views.decorators.http import require_GET, require_POST
 from .models import Question, Answer
 from django.contrib.auth.models import User
 import random
-from .forms import NameForm, AuthorForm, BookForm, AskForm, AnswerForm
+from .forms import NameForm, AuthorForm, BookForm, AskForm, AnswerForm, SignupForm
 from django.urls import reverse
+import datetime
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 @require_GET
@@ -35,6 +38,8 @@ def index(request, *args, **kwargs):
 
 
 @require_GET
+@login_required
+@permission_required('qa.view_question', raise_exception=True)
 def popular(request, *args, **kwargs):
     questions = Question.objects.popular()
     limit = 10
@@ -70,6 +75,7 @@ def question(request, *args, **kwargs):
     if request.method == 'POST':
         form = AnswerForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             answer = form.save(question)
             url = reverse('ask:question', args=[question_id])
             return HttpResponseRedirect(url)
@@ -92,6 +98,7 @@ def ask(request, *args, **kwargs):
     if request.method == 'POST':
         form = AskForm(request.POST)
         if form.is_valid():
+            form._user = request.user
             question = form.save()
             url = reverse('ask:question', args=[question.pk])
             return HttpResponseRedirect(url)
@@ -104,7 +111,30 @@ def ask(request, *args, **kwargs):
     return render(request, 'qa/ask.html', context)
 
 
+def signup(request, *args, **kwargs):
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password'])
+            user.save()
+            login(request, user)
+            return HttpResponseRedirect('/popular/?page=1')
+    else:
+        form = SignupForm()
+
+    context = {
+        'form': form
+    }
+    responce = render(request, 'qa/signup.html', context)
+
+    return responce
+
+
 def get_name(request, *args, **kwargs):
+    print(request.COOKIES)
+    print(request.session.items())
+    print(request.user)
+    request.session['dick long'] = '18'
     if request.method == "POST":
         form = AuthorForm(request.POST)
         if form.is_valid():
@@ -116,7 +146,8 @@ def get_name(request, *args, **kwargs):
         'form': form
     }
 
-    return render(request, 'qa/name.html', context)
+    responce = render(request, 'qa/name.html', context)
+    return responce
 
 
 def thanks(request, *args, **kwargs):
